@@ -47,8 +47,8 @@ export default function Home() {
           type="search"
           onChange={(e) => setQueryString(e.target.value)}
         />
+        <button onClick={() => getImages(queryString, page)}>Search</button>
       </div>
-      
       <div className="images">
         <Masonry columnsCount={4} gutter="5px">
           {images.map((image) => (
