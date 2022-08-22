@@ -5,33 +5,31 @@
 .input {
   margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .images {
   padding-bottom: 2em;
   margin-left: 0.4em;
   margin-right: 0.4em;
+  /* сверху | справа | снизу | слева */
+  margin: auto 1em auto 1em;
 }
 .header {
   height: 8vh;
-  background-color: rgb(230 0 35);
+  background-color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-header > h5 {
-  font: 25px Cookie, Arial, Helvetica, sans-serif;
-  color: white;
-  margin-left: 1em;
-  cursor: pointer;
+  justify-content: space-between;
 }
 .image-description {
   font-family: Helvetica, sans-serif;
   font-size: 20px;
   padding-left: 0.5em;
 }
-.author-description{
+.author-description {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,6 +39,6 @@ header > h5 {
 @media screen and (max-width: 1200px) {
   .image-description {
     font-size: calc(10px + (20 - 10) * ((100vw - 320px) / (1200 - 320)));
-    font-family: Helvetica, sans-serif
+    font-family: Helvetica, sans-serif;
   }
 }

@@ -21,20 +21,33 @@ export default function Home() {
         <title>Meirterest</title>
       </Head>
       <header className="header">
-        <h5>Meirterest</h5>
+        <Avatar
+          sx={{
+            bgcolor: "rgb(230 0 35)",
+            height: "5vh",
+            width: "5vh",
+            marginLeft: "0.4em",
+          }}
+          src="/broken-image.jpg"
+        >
+          M
+        </Avatar>
+        <div className="input">
+          <TextField
+            id="outlined-search"
+            label="Search..."
+            type="search"
+            onChange={(e) => setQueryString(e.target.value)}
+          />
+          <button onClick={() => getImages(queryString, page)}>Search</button>
+        </div>
       </header>
-      <div className="input">
-        <TextField
-          id="outlined-search"
-          label="Search..."
-          type="search"
-          onChange={(e) => setQueryString(e.target.value)}
-        />
-        <button onClick={() => getImages(queryString, page)}>Search</button>
-      </div>
+
       <div className="images">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 750: 2, 900: 3 }}>
-          <Masonry gutter="0.5vw">
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 750: 2, 900: 3, 1250: 4 }}
+        >
+          <Masonry gutter="1vw">
             {images.map((image) => (
               <div key={image.id}>
                 <img
