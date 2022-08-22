@@ -8,11 +8,15 @@ export default function Home() {
   const [images, setImages] = useState([]);
   const [queryString, setQueryString] = useState("");
   const [page, setPage] = useState(1);
-  const getImages = async (query, page) => {
+  const [allPages, setAllPages] = useState([]);
+  const getImages = async (e) => {
+    e.preventDefault();
     const user_key = "40kJkObwZKgcDycHW6Z0UDzoRJF8JIAIiW_CjkbjZEY";
     const result = await axios.get(
-      `https://api.unsplash.com/search/photos?query=${query}&page=${page}&per_page=10&client_id=${user_key}`
+      `https://api.unsplash.com/search/photos?query=${queryString}&page=${page}&per_page=20&client_id=${user_key}`
     );
+    const pages = result.data.total_pages;
+    setAllPages([...Array(10).keys()].map((i) => i + 1));
     setImages(result.data.results);
   };
   return (
@@ -39,10 +43,24 @@ export default function Home() {
             type="search"
             onChange={(e) => setQueryString(e.target.value)}
           />
-          <button onClick={() => getImages(queryString, page)}>Search</button>
+          <button onClick={ getImages}>Search</button>
         </div>
       </header>
-
+      <form
+        id="searchthis"
+        style={{ display: "inline" }}
+        onSubmit={getImages}
+      >
+        <input
+          id="namanyay-search-box"
+          name="q"
+          size="40"
+          type="text"
+          placeholder="  Type! :D "
+          onChange={(e) => setQueryString(e.target.value)}
+        />
+        <input id="namanyay-search-btn" value="Search" type="submit" />
+      </form>
       <div className="images">
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 750: 2, 900: 3, 1250: 4 }}
@@ -78,6 +96,9 @@ export default function Home() {
             ))}
           </Masonry>
         </ResponsiveMasonry>
+      </div>
+      <div className="pagination">
+        {allPages && allPages.map((page) => <h3 key={page}>{page}</h3>)}
       </div>
     </div>
   );
