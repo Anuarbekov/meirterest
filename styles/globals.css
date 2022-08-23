@@ -6,20 +6,22 @@
 #namanyay-search-btn {
   background: #0099ff;
   color: white;
-  font: "trebuchet ms", trebuchet;
+  font-family: Helvetica, sans-serif;
+  font-size: 20px;
   padding: 10px 20px;
   border-radius: 0 10px 10px 0;
-  -moz-border-radius: 0 10px 10px 0;
-  -webkit-border-radius: 0 10px 10px 0;
-  -o-border-radius: 0 10px 10px 0;
   border: 0 none;
-  font-weight: bold;
   margin-left: 5px;
+  cursor: pointer;
 }
-
+#searchthis{
+  margin-left: 38%;
+}
 #namanyay-search-box {
   background: #eee;
   padding: 10px;
+  font-family: Helvetica, sans-serif;
+  font-size: 20px;
   border-radius: 10px 0 0 10px;
   -moz-border-radius: 10px 0 0 10px;
   -webkit-border-radius: 10px 0 0 10px;
@@ -46,12 +48,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 .image-description {
   font-family: Helvetica, sans-serif;
   font-size: 20px;
   padding-left: 0.5em;
+  cursor: pointer;
 }
 .author-description {
   display: flex;
@@ -60,10 +65,20 @@
   margin-top: 0.5vw;
   padding-bottom: 0.5vw;
 }
-.pagination {
+.footer {
+  height: 4vh;
+  background-color: white;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  bottom: 0;
 }
-
+.footer h3 {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+}
 @media screen and (max-width: 1200px) {
   .image-description {
     font-size: calc(10px + (20 - 10) * ((100vw - 320px) / (1200 - 320)));
