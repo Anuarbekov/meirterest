@@ -9,18 +9,51 @@ export default function Home() {
   const [queryString, setQueryString] = useState("");
   const [page, setPage] = useState(1);
   const [allPages, setAllPages] = useState([]);
+  const [allRequestedStrings, setAllRequestedStrings] = useState([]);
   const getImages = async (e, page) => {
     e.preventDefault();
     if (queryString != "") {
       const user_key = "40kJkObwZKgcDycHW6Z0UDzoRJF8JIAIiW_CjkbjZEY";
       const result = await axios.get(
-        `https://api.unsplash.com/search/photos?query=${queryString}&page=${page}&per_page=20&client_id=${user_key}`
+        `https://api.unsplash.com/search/photos?query=${queryString}&page=${page}&per_page=10&client_id=${user_key}`
       );
-      setAllPages([...Array(10).keys()].map((i) => i + 1));
-      setImages(result.data.results);
+      console.log(result.data);
+      if (result.data.total >= 100) {
+        if (!allRequestedStrings.includes(queryString)) {
+          setPage(1);
+          setAllPages([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+          setImages(result.data.results);
+          setAllRequestedStrings((prevStrings) => [
+            ...prevStrings,
+            queryString,
+          ]);
+        } else {
+          setAllPages([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+          setImages(result.data.results);
+          setAllRequestedStrings((prevStrings) => [
+            ...prevStrings,
+            queryString,
+          ]);
+        }
+      } else {
+        function range(start, end) {
+          /* generate a range : [start, start+1, ..., end-1, end] */
+          var len = end - start + 1;
+          var a = new Array(len);
+          for (let i = 0; i < len; i++) a[i] = start + i;
+          return a;
+        }
+        const pageCount = Math.ceil(result.data.total / 10);
+        console.log(pageCount);
+        //setAllPages([...Array(pageCount).keys()].map((x) => x++));
+        setAllPages([...range(1, pageCount)]);
+        setImages(result.data.results);
+        setAllRequestedStrings((prevStrings) => [...prevStrings, queryString]);
+      }
     } else if (queryString == "") {
       setAllPages([]);
       setImages([]);
+      setAllPages([]);
     }
   };
   return (
